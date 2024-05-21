@@ -30,7 +30,7 @@ public class MergerManager : MonoBehaviour
             RegisterMergerToRandomSlot(m);
         }
     }
-   
+
 
     public bool CanMerge()
     {
@@ -102,7 +102,10 @@ public class MergerManager : MonoBehaviour
             {
                 current.GetComponent<Tower>().canShoot = false;
             }
-            $"Dragging {a.gameObject.name} from {currentSlot.name}".LOG();
+            if (currentSlot != null)
+            {
+                $"Dragging {a.gameObject.name} from {currentSlot.name}".LOG();
+            }
         }
 
     }

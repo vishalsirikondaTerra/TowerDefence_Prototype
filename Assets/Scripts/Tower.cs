@@ -33,6 +33,10 @@ public class Tower : MonoBehaviour
 
     void Update()
     {
+        if (!canShoot)
+        {
+            return;
+        }
         if (timer >= currentStat.fireInterval)
         {
             timer = 0;
