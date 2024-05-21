@@ -1,6 +1,7 @@
 using System.Linq;
 using UnityEngine;
 using System.Collections.Generic;
+using Random = System.Random;
 
 public class MergerManager : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class MergerManager : MonoBehaviour
     public MergeSlot[] mergeSlots;
     public List<Merger> mergers = new List<Merger>();
     public MergeSlot currentSlot;
+
+    public const bool MERGE_ONLY = true;
 
 
     void Start()
@@ -41,18 +44,41 @@ public class MergerManager : MonoBehaviour
 
     public void RegisterMergerToRandomSlot(Merger m)
     {
-        foreach (var slot in mergeSlots)
-        {
-            if (slot.IsEmpty)
-            {
-                slot.Insert(m);
-                return;
-            }
-        }
+        FindRandomSlot()?.Insert(m);
+        // foreach (var slot in mergeSlots)
+        // {
+        //     if (slot.IsEmpty)
+        //     {
+        //         slot.Insert(m);
+        //         return;
+        //     }
+        // }
     }
     public void RegisterMergerToSlot(MergeSlot otherSlot)
     {
         current.Release();
+        if (MERGE_ONLY)
+        {
+            if (CanMerge())
+            {
+                //change model of mergerA which is being dragged
+                //delete the mergerB
+                current.Merged();
+                otherSlot.Insert(current);
+                target.gameObject.SetActive(false);
+                SetAnotherMerger(null);
+
+            }
+            else
+            {
+                currentSlot.Insert(current);
+                //Reset current to its Original Slot
+            }
+            current.GetComponent<Tower>().canShoot = true;
+            currentSlot = null;
+            current = null;
+            return;
+        }
         if (otherSlot.IsEmpty)
         {
             otherSlot.Insert(current);
@@ -94,8 +120,8 @@ public class MergerManager : MonoBehaviour
             if (currentSlot != temp)
             {
                 temp?.Remove();
-                currentSlot = temp;
             }
+            currentSlot = temp;
             if (current != null)
             {
                 current.GetComponent<Tower>().canShoot = false;
@@ -131,6 +157,63 @@ public class MergerManager : MonoBehaviour
         return false;
     }
 
+    public MergeSlot FindRandomSlot()
+    {
+        int totalEmpty = 0;
+        int[] emptyIndeces = new int[16];
+        for (int i = 0; i < mergeSlots.Length; i++)
+        {
+            if (mergeSlots[i].IsEmpty)
+            {
+                emptyIndeces[totalEmpty++] = i;
+            }
+        }
+        var Rand = new Random();
+        if (totalEmpty > 0)
+        {
+            return mergeSlots[emptyIndeces[Rand.Next(0, totalEmpty)]];
+        }
+        else
+        {
+            return null;
+        }
+        // int[] visited = new int[mergeSlots.Length];
+        // MergeSlot slot = null;
+        // Random random = new Random();
+        // int index = random.Next(0, mergeSlots.Length);
+        // int counter = 0;
+        // while (slot == null)
+        // {
+        //     if (mergeSlots[index].IsEmpty)
+        //     {
+        //         slot = mergeSlots[index];
+        //     }
+        //     else
+        //     {
+        //         visited[counter++] = index;
+        //         slot = null;
+        //     }
+        //     index = random.Next(0, mergeSlots.Length);
+        //     int counter2 = 16;
+        //     while (Exists(visited, index) && counter2 > 0)
+        //     {
+        //         --counter2;
+        //         index = random.Next(0, mergeSlots.Length);
+        //     }
+        // }
+        // return slot;
+    }
+    public bool Exists(int[] slots, int item)
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i] == item)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
     public bool AnyEmptySlot()
     {
         foreach (var item in mergeSlots)
