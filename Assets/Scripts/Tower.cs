@@ -9,28 +9,32 @@ public class Tower : MonoBehaviour
     [Header("Private")]
     public float timer;
     [Space, Header("Self")]
-    public const float maxHealth = 100;
-    public float health = 100;
     public bool canShoot;
+    public float health = 100;
 
     [Space, Header("Bullet Parameters")]
     public TowerBullet bulletPrefab;
-    public float bulletSpeed;
-    public float bulletDamage;
-    public float fireInterval;
-    public int fireCount;
 
-    // Start is called before the first frame update
+    public TowerLevels towerLevels;
+    public TowerLevelStat currentStat;
+
+    public int currentLevel = 1;
+
+    void Awake()
+    {
+        currentStat = towerLevels.GetLevelStatAt(1);
+        health = currentStat.maxHealth;
+
+    }
     void Start()
     {
         canShoot = true;
-        health = maxHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (timer >= fireInterval)
+        if (timer >= currentStat.fireInterval)
         {
             timer = 0;
             FireInTheHole();
@@ -40,7 +44,7 @@ public class Tower : MonoBehaviour
     void FireInTheHole()
     {
         var tb = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-        tb.Fire(bulletDamage, bulletSpeed);
+        tb.Fire(currentStat.bulletDamage, currentStat.bulletSpeed);
     }
 
     internal void Hit(float damage)
@@ -52,4 +56,13 @@ public class Tower : MonoBehaviour
             $"{gameObject.name} Killed".LOG();
         }
     }
+
+    public void LevelIncrease()
+    {
+        currentLevel += 1;
+        currentStat = towerLevels.GetLevelStatAt(currentLevel);
+        health = currentStat.maxHealth;
+        timer = 0;
+    }
+
 }

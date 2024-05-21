@@ -28,6 +28,7 @@ public class Merger : MonoBehaviour
     {
         level++;
         text.text = $"{level}";
+        GetComponent<Tower>().LevelIncrease();
     }
     private void OnTriggerEnter(Collider collider)
     {

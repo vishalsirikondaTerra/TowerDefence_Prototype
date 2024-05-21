@@ -53,7 +53,7 @@ public class EnemySpawner : MonoBehaviour
             lastLane = lane;
             Transform laneTr = spawnLanes[lane];
             var enemy = Instantiate(enemyToSpawn, laneTr.position, laneTr.localRotation);
-            enemy.Spawn();
+            enemy.Spawn(1);
 
         }
 

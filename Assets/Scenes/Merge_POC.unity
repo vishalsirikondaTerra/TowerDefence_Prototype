@@ -492,7 +492,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1996496424}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &441371384
 MonoBehaviour:
@@ -506,18 +506,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16af3e98d11154677a3b86871507c917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1.2
-  damage: 20
-  health: 0
   canMove: 0
-  attackEvery: 1
-  attackTimer: 0
-  towerAt: {fileID: 0}
   towerAtDistance: 1
   towerMask:
     serializedVersion: 2
     m_Bits: 256
   foundTower: {fileID: 0}
+  currentStat:
+    moveSpeed: 0
+    damage: 0
+    maxHealth: 0
+    attackEvery: 0
+  enemyLevels: {fileID: 1547506423}
+  currentHealth: 0
+  currentLevel: 1
 --- !u!1 &456321728
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,13 +699,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 2
-  health: 14
   canShoot: 0
+  health: 14
   bulletPrefab: {fileID: 1824828437}
-  bulletSpeed: 3
-  bulletDamage: 35
-  fireInterval: 2
-  fireCount: 1
+  towerLevels: {fileID: 1268842674}
+  currentStat:
+    maxHealth: 0
+    bulletSpeed: 0
+    bulletDamage: 0
+    fireInterval: 0
+    fireCount: 0
+  currentLevel: 1
 --- !u!114 &482633956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1627,13 +1633,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 2
-  health: 100
   canShoot: 0
+  health: 100
   bulletPrefab: {fileID: 1824828437}
-  bulletSpeed: 3
-  bulletDamage: 40
-  fireInterval: 2
-  fireCount: 1
+  towerLevels: {fileID: 1268842674}
+  currentStat:
+    maxHealth: 0
+    bulletSpeed: 0
+    bulletDamage: 0
+    fireInterval: 0
+    fireCount: 0
+  currentLevel: 1
 --- !u!54 &978138467
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1685,13 +1695,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 3
-  health: 100
   canShoot: 0
+  health: 100
   bulletPrefab: {fileID: 1824828437}
-  bulletSpeed: 3
-  bulletDamage: 40
-  fireInterval: 2
-  fireCount: 1
+  towerLevels: {fileID: 1268842674}
+  currentStat:
+    maxHealth: 0
+    bulletSpeed: 0
+    bulletDamage: 0
+    fireInterval: 0
+    fireCount: 0
+  currentLevel: 1
 --- !u!114 &984750874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2597,6 +2611,66 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotNo: 0
   currentlyHolding: {fileID: 0}
+--- !u!1 &1268842672
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1268842673}
+  - component: {fileID: 1268842674}
+  m_Layer: 0
+  m_Name: Tower Level Stats
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1268842673
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268842672}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1996496424}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1268842674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268842672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aef0aa2296b9b4836a51c04275a56cd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelStats:
+  - maxHealth: 0
+    bulletSpeed: 0
+    bulletDamage: 0
+    fireInterval: 0
+    fireCount: 0
+  - maxHealth: 0
+    bulletSpeed: 0
+    bulletDamage: 0
+    fireInterval: 0
+    fireCount: 0
+  - maxHealth: 0
+    bulletSpeed: 0
+    bulletDamage: 0
+    fireInterval: 0
+    fireCount: 0
 --- !u!1 &1372520847
 GameObject:
   m_ObjectHideFlags: 0
@@ -3230,6 +3304,59 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1497566001}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1547506421
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1547506422}
+  - component: {fileID: 1547506423}
+  m_Layer: 0
+  m_Name: Enemy level Stats
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1547506422
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547506421}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1996496424}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1547506423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547506421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78f479e5bc96d4cd385e3690d325a53f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelStats:
+  - moveSpeed: 0
+    damage: 0
+    maxHealth: 0
+    attackEvery: 0
+  - moveSpeed: 0
+    damage: 0
+    maxHealth: 0
+    attackEvery: 0
 --- !u!1 &1568898575
 GameObject:
   m_ObjectHideFlags: 0
@@ -4071,7 +4198,7 @@ Transform:
   - {fileID: 1568898576}
   - {fileID: 1385654984}
   m_Father: {fileID: 1996496424}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &1858633446
 SphereCollider:
@@ -4647,8 +4774,10 @@ Transform:
   - {fileID: 218173305}
   - {fileID: 1824828436}
   - {fileID: 482633953}
-  - {fileID: 1858633445}
   - {fileID: 441371383}
+  - {fileID: 1858633445}
+  - {fileID: 1547506422}
+  - {fileID: 1268842673}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
