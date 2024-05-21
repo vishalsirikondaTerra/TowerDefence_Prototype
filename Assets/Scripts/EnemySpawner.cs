@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
@@ -16,6 +15,9 @@ public class EnemySpawner : MonoBehaviour
     public Enemy enemyToSpawn;
     public Wave[] waves;
     public Wave currentWave;
+    public bool spawningInProgress;
+    private int currentWaveIndex;
+
 
     public void Awake()
     {
@@ -27,22 +29,28 @@ public class EnemySpawner : MonoBehaviour
     }
     void Start()
     {
-        currentWave = waves[0];
+        currentWaveIndex = 0;
+        currentWave = waves[currentWaveIndex];
         lastLane = -1;
     }
     public void Update()
     {
+        if (spawningInProgress)
+        {
+            return;
+        }
         if (timer >= currentWave.spawnInterval)
         {
             timer = 0;
-            SpawnEnemies();
+            StartCoroutine(SpawnEnemies());
         }
         timer += Time.deltaTime;
     }
 
-    private void SpawnEnemies()
+    private IEnumerator SpawnEnemies()
     {
-        int enemies = currentWave.totalEnemiesPerWave;
+        spawningInProgress = true;
+        int enemies = currentWave.GetSpawnCount();
         for (int i = 0; i < enemies; i++)
         {
             int lane = -1;
@@ -53,17 +61,42 @@ public class EnemySpawner : MonoBehaviour
             lastLane = lane;
             Transform laneTr = spawnLanes[lane];
             var enemy = Instantiate(enemyToSpawn, laneTr.position, laneTr.localRotation);
-            enemy.Spawn(1);
-
+            enemy.Spawn(currentWave.GetRandomLevel());
+            yield return new WaitForSeconds(Random.Range(0.2f, 0.5f));
         }
-
+        currentWave.totalEnemiesPerWave -= enemies;
+        if (currentWave.totalEnemiesPerWave <= 0)
+        {
+            NextWave();
+        }
+        spawningInProgress = false;
+    }
+    private void NextWave()
+    {
+        currentWaveIndex += 1;
+        if (currentWaveIndex >= waves.Length)
+        {
+            currentWaveIndex = waves.Length - 1;
+        }
+        currentWave = waves[currentWaveIndex];
     }
 
     [Serializable]
     public struct Wave
     {
         public float spawnInterval;
+        public Vector2Int spawnRandomRange;
         public int totalEnemiesPerWave;
+        public int[] spawnEnemyOfLevels;
+
+        public int GetSpawnCount()
+        {
+            return Random.Range(spawnRandomRange.x, spawnRandomRange.y + 1);
+        }
+        public int GetRandomLevel()
+        {
+            return spawnEnemyOfLevels[Random.Range(0, spawnEnemyOfLevels.Length)];
+        }
 
     }
 }

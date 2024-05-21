@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -11,12 +12,15 @@ public class Enemy : MonoBehaviour
     public Ray ray;
     public float towerAtDistance = 3f;
     public LayerMask towerMask;
-    public Tower foundTower;
     public EnemyLevelStat currentStat;
     public EnemyLevels enemyLevels;
 
+    public TextMeshProUGUI text;
+
     public float currentHealth;
     public int currentLevel = 1;
+    [Space(20)]
+    public Tower foundTower;
 
     public void Awake()
     {
@@ -78,6 +82,7 @@ public class Enemy : MonoBehaviour
         canMove = true;
         currentStat = enemyLevels.GetLevelStatAt(level);
         currentHealth = currentStat.maxHealth;
+        text.text = $"{currentLevel}";
     }
 
     void OnDrawGizmos()

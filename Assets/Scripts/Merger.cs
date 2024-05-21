@@ -6,8 +6,8 @@ public class Merger : MonoBehaviour
     public GameManager gameManager;
     public MergerManager mergerManager;
     public TextMeshProUGUI text;
-    public int level;
     public RaycastHit hit => gameManager.raycastHit;
+    public int level;
     public bool isBeingDragged;
 
     public Vector3 lastSlotPosition;
