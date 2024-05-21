@@ -1,9 +1,6 @@
 using TMPro;
-using System;
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.EventSystems;
+
 public class Merger : MonoBehaviour
 {
     public GameManager gameManager;
@@ -66,25 +63,6 @@ public class Merger : MonoBehaviour
         isBeingDragged = true;
 
         SetPosition(point);
-        // if (release)
-        // {
-        //     Release();
-        //     if (mergerManager.ValidateSwap())
-        //     {
-        //         return;
-        //     }
-        //     if (mergerManager.ValidateMerge())
-        //     {
-        //         ///get new model and set this mergers stats
-        //         ///Tower get tower and check
-        //         level++;
-        //         text.text = $"{level}";
-        //     }
-
-        //     SetPosition(point);
-        //     return;
-        // }
-        // transform.parent = mergerManager.hitTr;
     }
     public void SetPosition(Vector3 pos)
     {

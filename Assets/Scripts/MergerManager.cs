@@ -64,7 +64,7 @@ public class MergerManager : MonoBehaviour
             current = null;
         }
     }
-    public void RegisterMergerToSlot(MergeSlot otherSlot)
+    public void TryRegisterMergerToSlot(MergeSlot otherSlot)
     {
         current.Release();
         if (MERGE_ONLY)

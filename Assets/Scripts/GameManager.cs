@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     #region UI
 
     public Button spawnButton;
-    private float spawnTowerDelay = 2f;
+    public float spawnTowerDelay = 2f;
 
     #endregion
 
@@ -51,12 +51,19 @@ public class GameManager : MonoBehaviour
         {
             var tower = Instantiate(spawnTower);
             tower.gameObject.SetActive(true);
-            mergerManager.RegisterMergerToRandomSlot(tower.GetComponent<Merger>());
+            mergerManager.RegisterTowerToRandomSlot(tower.GetComponent<Merger>());
         }
         else
         {
             $"No Slot Is Empty".LOG();
         }
+        StartCoroutine(SpawnButtonTimer());
+    }
+    IEnumerator SpawnButtonTimer()
+    {
+        spawnButton.interactable = false;
+        yield return new WaitForSeconds(spawnTowerDelay);
+        spawnButton.interactable = true;
     }
 
     private void Update()
@@ -85,8 +92,12 @@ public class GameManager : MonoBehaviour
         }
         if (Physics.Raycast(ray, out raycastHit, Mathf.Infinity, snapLayer))
         {
-            mergerManager.RegisterMergerToSlot(raycastHit.transform.GetComponent<MergeSlot>());
+            mergerManager.TryRegisterMergerToSlot(raycastHit.transform.GetComponent<MergeSlot>());
             // mergerManager.Move(raycastHit.transform.position, true);
+        }
+        else
+        {
+            mergerManager.ResetToOriginal();
         }
         // mergerManager.AssignMergerForDrag(null);
 
@@ -108,6 +119,7 @@ public class GameManager : MonoBehaviour
         {
             lineRenderer.enabled = false;
             HitSuccess = false;
+            Release();
         }
     }
     void Drag()

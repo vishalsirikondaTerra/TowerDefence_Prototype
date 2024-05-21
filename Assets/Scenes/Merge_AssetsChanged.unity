@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18365249, g: 0.22794418, b: 0.2982877, a: 1}
+  m_IndirectSpecularColor: {r: 0.18365182, g: 0.22794369, b: 0.29828614, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6128,10 +6128,18 @@ MonoBehaviour:
   enemyToSpawn: {fileID: 441371384}
   waves:
   - spawnInterval: 5
-    totalEnemiesPerWave: 2
+    totalEnemiesPerWave: 20
+    spawnEnemyOfLevels: 01000000
+  - spawnInterval: 5
+    totalEnemiesPerWave: 30
+    spawnEnemyOfLevels: 0100000002000000
+  - spawnInterval: 5
+    totalEnemiesPerWave: 30
+    spawnEnemyOfLevels: 010000000200000003000000
   currentWave:
     spawnInterval: 0
     totalEnemiesPerWave: 0
+    spawnEnemyOfLevels: 
 --- !u!1 &2033827373
 GameObject:
   m_ObjectHideFlags: 0
