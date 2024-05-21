@@ -89,7 +89,6 @@ public class Merger : MonoBehaviour
     public void SetPosition(Vector3 pos)
     {
         transform.position = new Vector3(pos.x, GameManager.HeightOffset, pos.z);//- offset;
-
         lastSlotPosition = transform.position;
     }
 }

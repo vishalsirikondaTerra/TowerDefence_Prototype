@@ -7,12 +7,12 @@ public class MergerManager : MonoBehaviour
 {
     public Merger current;
     public Merger target;
+    public MergeSlot currentSlot;
     public Transform hitTr;
 
     public Transform mergeAreaParent;
     public MergeSlot[] mergeSlots;
     public List<Merger> mergers = new List<Merger>();
-    public MergeSlot currentSlot;
 
     public const bool MERGE_ONLY = true;
 
@@ -28,7 +28,7 @@ public class MergerManager : MonoBehaviour
         mergers = FindObjectsOfType<Merger>().ToList();
         foreach (var m in mergers)
         {
-            RegisterMergerToRandomSlot(m);
+            RegisterTowerToRandomSlot(m);
         }
     }
 
@@ -42,7 +42,7 @@ public class MergerManager : MonoBehaviour
         return current != null && target != null && (current.level != target.level);
     }
 
-    public void RegisterMergerToRandomSlot(Merger m)
+    public void RegisterTowerToRandomSlot(Merger m)
     {
         FindRandomSlot()?.Insert(m);
         // foreach (var slot in mergeSlots)
@@ -53,6 +53,16 @@ public class MergerManager : MonoBehaviour
         //         return;
         //     }
         // }
+    }
+    public void ResetToOriginal()
+    {
+        if (currentSlot != null && current != null)
+        {
+            current.Release();
+            currentSlot.Insert(current);
+            currentSlot = null;
+            current = null;
+        }
     }
     public void RegisterMergerToSlot(MergeSlot otherSlot)
     {
@@ -225,4 +235,6 @@ public class MergerManager : MonoBehaviour
         }
         return false;
     }
+
+
 }
