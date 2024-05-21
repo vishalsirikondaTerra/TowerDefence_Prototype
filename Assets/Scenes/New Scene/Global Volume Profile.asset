@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c23e3b12dc18c42a140437e53d3951, type: 3}
   m_Name: Tonemapping
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   mode:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 2
 --- !u!114 &-246822652308477855
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -82,10 +82,10 @@ MonoBehaviour:
   active: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 0.9
+    m_Value: 1.71
   intensity:
     m_OverrideState: 1
-    m_Value: 1.62
+    m_Value: 8.08
   scatter:
     m_OverrideState: 0
     m_Value: 0.7
@@ -129,10 +129,10 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.214
+    m_Value: 0.317
   smoothness:
     m_OverrideState: 1
-    m_Value: 0.524
+    m_Value: 0.618
   rounded:
     m_OverrideState: 0
     m_Value: 0

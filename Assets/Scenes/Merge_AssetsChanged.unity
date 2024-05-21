@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18365182, g: 0.22794369, b: 0.29828614, a: 1}
+  m_IndirectSpecularColor: {r: 0.18365249, g: 0.22794418, b: 0.2982877, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3517,19 +3517,24 @@ MonoBehaviour:
   levelStats:
   - maxHealth: 100
     bulletSpeed: 2
-    bulletDamage: 3
-    fireInterval: 4
+    bulletDamage: 10
+    fireInterval: 3
     fireCount: 1
-  - maxHealth: 100
+  - maxHealth: 150
     bulletSpeed: 5
-    bulletDamage: 4
-    fireInterval: 1
+    bulletDamage: 13
+    fireInterval: 2
     fireCount: 1
-  - maxHealth: 100
+  - maxHealth: 200
     bulletSpeed: 10
-    bulletDamage: 5
-    fireInterval: 0.3
+    bulletDamage: 17
+    fireInterval: 1.5
     fireCount: 1
+  - maxHealth: 250
+    bulletSpeed: 15
+    bulletDamage: 20
+    fireInterval: 1
+    fireCount: 2
 --- !u!1 &1364352760
 GameObject:
   m_ObjectHideFlags: 0
@@ -4530,14 +4535,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelStats:
-  - moveSpeed: 1
+  - moveSpeed: 0.5
     damage: 15
-    maxHealth: 10
-    attackEvery: 0.2
-  - moveSpeed: 1.5
-    damage: 15
-    maxHealth: 25
+    maxHealth: 100
+    attackEvery: 1
+  - moveSpeed: 0.75
+    damage: 25
+    maxHealth: 150
+    attackEvery: 0.5
+  - moveSpeed: 0.3
+    damage: 50
+    maxHealth: 130
     attackEvery: 0.3
+  - moveSpeed: 1
+    damage: 100
+    maxHealth: 200
+    attackEvery: 0.1
 --- !u!1 &1568898575
 GameObject:
   m_ObjectHideFlags: 0
@@ -6208,7 +6221,7 @@ MonoBehaviour:
     m_Bits: 64
   hitPoint: {x: 0, y: 0, z: 0}
   spawnButton: {fileID: 2047841159}
-  spawnTowerDelay: 2
+  spawnTowerDelay: 1
 --- !u!4 &1996496424
 Transform:
   m_ObjectHideFlags: 0
@@ -6367,16 +6380,16 @@ MonoBehaviour:
   enemyToSpawn: {fileID: 441371384}
   waves:
   - spawnInterval: 5
-    spawnRandomRange: {x: 3, y: 4}
+    spawnRandomRange: {x: 1, y: 2}
     totalEnemiesPerWave: 20
-    spawnEnemyOfLevels: 01000000
-  - spawnInterval: 5
-    spawnRandomRange: {x: 0, y: 0}
-    totalEnemiesPerWave: 30
     spawnEnemyOfLevels: 0100000002000000
-  - spawnInterval: 5
-    spawnRandomRange: {x: 0, y: 0}
+  - spawnInterval: 2
+    spawnRandomRange: {x: 1, y: 2}
     totalEnemiesPerWave: 30
+    spawnEnemyOfLevels: 010000000200000003000000
+  - spawnInterval: 1
+    spawnRandomRange: {x: 1, y: 1}
+    totalEnemiesPerWave: 50
     spawnEnemyOfLevels: 010000000200000003000000
   currentWave:
     spawnInterval: 0
