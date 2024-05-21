@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
+    public Transform trigger;
     public bool canMove;
 
     private float attackTimer;
@@ -47,7 +48,8 @@ public class Enemy : MonoBehaviour
         {
             transform.Translate(Vector3.forward * currentStat.moveSpeed * Time.deltaTime);
         }
-
+        ray = new Ray(transform.position, transform.forward * towerAtDistance);
+        trigger.position = (ray.direction * towerAtDistance) + transform.position;
         if (Physics.SphereCast(ray, 0.3f, out RaycastHit hit, 1f, towerMask))
         {
             canMove = false;
