@@ -9,6 +9,7 @@ public class TowerLevels : MonoBehaviour
 
     public TowerLevelStat GetLevelStatAt(int level)
     {
+        level = level - 1;
         if (level >= levelStats.Length)
         {
             level = levelStats.Length - 1;
@@ -17,7 +18,7 @@ public class TowerLevels : MonoBehaviour
         {
             level = 0;
         }
-        return levelStats[level - 1];
+        return levelStats[level];
     }
 }
 

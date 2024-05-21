@@ -2656,21 +2656,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelStats:
-  - maxHealth: 0
-    bulletSpeed: 0
-    bulletDamage: 0
+  - maxHealth: 100
+    bulletSpeed: 2
+    bulletDamage: 3
+    fireInterval: 4
+    fireCount: 1
+  - maxHealth: 100
+    bulletSpeed: 5
+    bulletDamage: 4
+    fireInterval: 1
+    fireCount: 1
+  - maxHealth: 100
+    bulletSpeed: 10
+    bulletDamage: 5
     fireInterval: 0
-    fireCount: 0
-  - maxHealth: 0
-    bulletSpeed: 0
-    bulletDamage: 0
-    fireInterval: 0
-    fireCount: 0
-  - maxHealth: 0
-    bulletSpeed: 0
-    bulletDamage: 0
-    fireInterval: 0
-    fireCount: 0
+    fireCount: 1
 --- !u!1 &1372520847
 GameObject:
   m_ObjectHideFlags: 0
@@ -3349,14 +3349,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelStats:
-  - moveSpeed: 0
-    damage: 0
-    maxHealth: 0
-    attackEvery: 0
-  - moveSpeed: 0
-    damage: 0
-    maxHealth: 0
-    attackEvery: 0
+  - moveSpeed: 2
+    damage: 15
+    maxHealth: 10
+    attackEvery: 0.2
+  - moveSpeed: 1.6
+    damage: 15
+    maxHealth: 25
+    attackEvery: 0.3
 --- !u!1 &1568898575
 GameObject:
   m_ObjectHideFlags: 0

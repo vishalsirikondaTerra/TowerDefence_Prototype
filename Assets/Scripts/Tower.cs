@@ -31,7 +31,6 @@ public class Tower : MonoBehaviour
         canShoot = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (timer >= currentStat.fireInterval)

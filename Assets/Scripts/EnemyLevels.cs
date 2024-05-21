@@ -9,6 +9,7 @@ public class EnemyLevels : MonoBehaviour
 
     public EnemyLevelStat GetLevelStatAt(int level)
     {
+        level = level - 1;
         if (level >= levelStats.Length)
         {
             level = levelStats.Length - 1;
@@ -17,7 +18,7 @@ public class EnemyLevels : MonoBehaviour
         {
             level = 0;
         }
-        return levelStats[level - 1];
+        return levelStats[level];
     }
 }
 [System.Serializable]
