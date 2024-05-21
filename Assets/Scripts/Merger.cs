@@ -23,12 +23,14 @@ public class Merger : MonoBehaviour
     {
         isBeingDragged = false;
         transform.parent = null;
+        GetComponent<Tower>().canShoot = true;
     }
     public void Merged()
     {
         level++;
         text.text = $"{level}";
         GetComponent<Tower>().LevelIncrease();
+        GetComponent<Tower>().canShoot = true;
     }
     private void OnTriggerEnter(Collider collider)
     {
@@ -60,6 +62,7 @@ public class Merger : MonoBehaviour
 
     public void Drag(Vector3 point)
     {
+        GetComponent<Tower>().canShoot = false;
         isBeingDragged = true;
 
         SetPosition(point);
