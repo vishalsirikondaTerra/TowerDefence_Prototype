@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class TowerBullet : MonoBehaviour
@@ -9,12 +5,15 @@ public class TowerBullet : MonoBehaviour
     public float damageValue;
     public float speed;
     public bool shoot;
-    public void Fire(float _dam, float _speed)
+    private Vector3 source;
+
+    public void Fire(float _dam, float _speed, Vector3 _source)
     {
         gameObject.hideFlags = HideFlags.HideInHierarchy;
         damageValue = _dam;
         speed = _speed;
         shoot = true;
+        source = _source;
         gameObject.SetActive(true);
     }
 
@@ -24,6 +23,10 @@ public class TowerBullet : MonoBehaviour
         if (shoot)
         {
             transform.Translate(Vector3.forward * (speed * Time.deltaTime), Space.World);
+        }
+        if (Vector3.Distance(source, transform.position) > 50)
+        {
+            Destroy(gameObject);
         }
     }
     public void TurnOff()

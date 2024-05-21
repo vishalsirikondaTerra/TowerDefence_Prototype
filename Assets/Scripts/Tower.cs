@@ -47,7 +47,7 @@ public class Tower : MonoBehaviour
     void FireInTheHole()
     {
         var tb = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-        tb.Fire(currentStat.bulletDamage, currentStat.bulletSpeed);
+        tb.Fire(currentStat.bulletDamage, currentStat.bulletSpeed, transform.position);
     }
 
     internal void Hit(float damage)
