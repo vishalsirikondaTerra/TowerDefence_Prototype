@@ -21,8 +21,8 @@ public class GameManager : MonoBehaviour
     LineRenderer lineRenderer;
     public Camera GetCamera => mainCamera;
 
+    [Header("UI")]
     #region UI
-
     public Button spawnButton;
     public float spawnTowerDelay = 2f;
 
@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            $"No Slot Is Empty".LOG();
+          //  $"No Slot Is Empty".LOG();
         }
         StartCoroutine(SpawnButtonTimer());
     }

@@ -82,6 +82,7 @@ public class Enemy : MonoBehaviour
         canMove = true;
         currentStat = enemyLevels.GetLevelStatAt(level);
         currentHealth = currentStat.maxHealth;
+        currentLevel = level;
         text.text = $"{currentLevel}";
     }
 
