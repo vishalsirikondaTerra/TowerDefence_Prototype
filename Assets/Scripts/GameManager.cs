@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Events;
 using System;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
     [Header("UI")]
     #region UI
     public Button spawnButton;
+    public Button toggleMerge;
     public float spawnTowerDelay = 2f;
 
     #endregion
@@ -43,6 +45,14 @@ public class GameManager : MonoBehaviour
         mainCamera = Camera.main;
         spawnButton.onClick.RemoveAllListeners();
         spawnButton.onClick.AddListener(SpawnTower);
+
+        toggleMerge.onClick.RemoveAllListeners();
+        toggleMerge.onClick.AddListener(() =>
+        {
+            MergerManager.MERGE_ONLY = !MergerManager.MERGE_ONLY;
+            bool value = MergerManager.MERGE_ONLY;
+            toggleMerge.GetComponentInChildren<TextMeshProUGUI>().text = value ? "MergeOnly Mode" : "Freedom Mode";
+        });
     }
 
     private void SpawnTower()
@@ -55,7 +65,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-          //  $"No Slot Is Empty".LOG();
+            //  $"No Slot Is Empty".LOG();
         }
         StartCoroutine(SpawnButtonTimer());
     }

@@ -14,7 +14,7 @@ public class MergerManager : MonoBehaviour
     public MergeSlot[] mergeSlots;
     public List<Merger> mergers = new List<Merger>();
 
-    public const bool MERGE_ONLY = true;
+    public static bool MERGE_ONLY = true;
 
 
     void Start()
