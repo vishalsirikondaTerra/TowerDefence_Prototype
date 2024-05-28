@@ -9,6 +9,8 @@ public class EnemySpawner : MonoBehaviour
 
     public Transform[] spawnLanes;
     public float timer;
+    public float waveintervaldelay;
+
     private int lastLane;
 
     [Space, Header("Parameters")]
@@ -18,6 +20,7 @@ public class EnemySpawner : MonoBehaviour
     public bool spawningInProgress;
     [SerializeField] private int currentWaveIndex;
     [SerializeField] private GameManager gameManager;
+    public bool changeWave;
 
 
     public void Awake()
@@ -41,11 +44,23 @@ public class EnemySpawner : MonoBehaviour
         {
             return;
         }
-        if (timer >= currentWave.spawnInterval)
+        if (!changeWave)
         {
-            timer = 0;
-            StartCoroutine(SpawnEnemies());
+
+            if (timer >= currentWave.spawnInterval)
+            {
+                timer = 0;
+                StartCoroutine(SpawnEnemies());
+            }
         }
+        else
+        {
+            if(timer >= waveintervaldelay)
+            {
+                changeWave = false;
+            }
+        }
+
         timer += Time.deltaTime;
     }
 
@@ -76,7 +91,9 @@ public class EnemySpawner : MonoBehaviour
     private void NextWave()
     {
         currentWaveIndex += 1;
-        $"Highest Level Merge = {gameManager.highestLevel}".LOG();
+        changeWave = true;
+        gameManager.NextWave();
+        $" Highest Level Merge = {gameManager.highestLevel}".LOG();
         if (currentWaveIndex >= waves.Length)
         {
             currentWaveIndex = waves.Length - 1;
@@ -102,4 +119,5 @@ public class EnemySpawner : MonoBehaviour
         }
 
     }
+
 }

@@ -15,12 +15,13 @@ public class MergerManager : MonoBehaviour
     public List<Merger> mergers = new List<Merger>();
 
     public static bool MERGE_ONLY = true;
-
+    public int totalSlots = 12;
 
     void Start()
     {
-        mergeSlots = new MergeSlot[16];
-        for (int i = 0; i < 16; i++)
+
+        mergeSlots = new MergeSlot[totalSlots];
+        for (int i = 0; i < totalSlots; i++)
         {
             mergeSlots[i] = mergeAreaParent.GetChild(i).GetComponent<MergeSlot>();
             mergeSlots[i].slotNo = i + 1;

@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     public Tower spawnTower;
     public int highestLevel;
     private Camera mainCamera;
+    public  TextMeshProUGUI waveText;
+    public int waveCounter = 0;
 
     public bool HitSuccess;
     Ray ray;
@@ -21,6 +23,7 @@ public class GameManager : MonoBehaviour
     public LayerMask moveLayer, snapLayer;
     public Vector3 hitPoint;
     LineRenderer lineRenderer;
+    
     public Camera GetCamera => mainCamera;
 
     [Header("UI")]
@@ -62,6 +65,7 @@ public class GameManager : MonoBehaviour
             bool value = MergerManager.MERGE_ONLY;
             toggleMerge.GetComponentInChildren<TextMeshProUGUI>().text = value ? "MergeOnly Mode" : "Freedom Mode";
         });
+        waveCounter = 1;
     }
 
     private void SpawnTower()
@@ -168,4 +172,13 @@ public class GameManager : MonoBehaviour
             highestLevel = level;
         }
     }
+
+    public void NextWave()
+    {
+
+        waveCounter++;
+        waveText.text = $"Wave :{waveCounter}";
+    }
+
+  
 }
