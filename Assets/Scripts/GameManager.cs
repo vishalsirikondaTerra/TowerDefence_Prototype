@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public const float HeightOffset = 2.2f;
     public MergerManager mergerManager;
     public Tower spawnTower;
+    public int highestLevel;
     private Camera mainCamera;
 
     public bool HitSuccess;
@@ -24,7 +25,15 @@ public class GameManager : MonoBehaviour
 
     [Header("UI")]
     #region UI
+    [Header("Spawn Logic")]
+    public float timeToFillElixir;
+    private float fillRate;
+    public float maxElixirAmount;
+    public float currentElixirAmount;
+    public float spawnCost;
+    public Gradient gradient;
     public Button spawnButton;
+    public Image elixirBar;
     public Button toggleMerge;
     public float spawnTowerDelay = 2f;
 
@@ -57,8 +66,9 @@ public class GameManager : MonoBehaviour
 
     private void SpawnTower()
     {
-        if (mergerManager.AnyEmptySlot())
+        if (mergerManager.AnyEmptySlot() && currentElixirAmount > spawnCost)
         {
+            currentElixirAmount -= spawnCost;
             var tower = Instantiate(spawnTower);
             tower.gameObject.SetActive(true);
             mergerManager.RegisterTowerToRandomSlot(tower.GetComponent<Merger>());
@@ -67,7 +77,7 @@ public class GameManager : MonoBehaviour
         {
             //  $"No Slot Is Empty".LOG();
         }
-        StartCoroutine(SpawnButtonTimer());
+        // StartCoroutine(SpawnButtonTimer());
     }
     IEnumerator SpawnButtonTimer()
     {
@@ -78,6 +88,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        ElixirLogic();
         if (Input.GetMouseButtonDown(0))
         {
             MouseDownInput = true;
@@ -93,6 +104,19 @@ public class GameManager : MonoBehaviour
         }
         HitRayCast();
     }
+    private void ElixirLogic()
+    {
+        fillRate = maxElixirAmount / timeToFillElixir;
+        spawnButton.interactable = currentElixirAmount >= spawnCost;
+        currentElixirAmount += fillRate * Time.deltaTime;
+        elixirBar.fillAmount = Mathf.InverseLerp(0, maxElixirAmount, currentElixirAmount);
+        elixirBar.color = gradient.Evaluate(elixirBar.fillAmount);
+        if (currentElixirAmount >= maxElixirAmount)
+        {
+            currentElixirAmount = maxElixirAmount;
+        }
+    }
+
     void Release()
     {
         MouseDownInput = false;
@@ -135,5 +159,13 @@ public class GameManager : MonoBehaviour
     void Drag()
     {
         mergerManager.Drag(hitPoint);
+    }
+
+    public void CheckHigherLevel(int level)
+    {
+        if (level > highestLevel)
+        {
+            highestLevel = level;
+        }
     }
 }

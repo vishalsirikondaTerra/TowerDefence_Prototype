@@ -16,7 +16,8 @@ public class EnemySpawner : MonoBehaviour
     public Wave[] waves;
     public Wave currentWave;
     public bool spawningInProgress;
-    private int currentWaveIndex;
+    [SerializeField] private int currentWaveIndex;
+    [SerializeField] private GameManager gameManager;
 
 
     public void Awake()
@@ -26,6 +27,7 @@ public class EnemySpawner : MonoBehaviour
         {
             spawnLanes[i] = spawnParent.GetChild(i);
         }
+        gameManager = GetComponent<GameManager>();
     }
     void Start()
     {
@@ -74,6 +76,7 @@ public class EnemySpawner : MonoBehaviour
     private void NextWave()
     {
         currentWaveIndex += 1;
+        $"Highest Level Merge = {gameManager.highestLevel}".LOG();
         if (currentWaveIndex >= waves.Length)
         {
             currentWaveIndex = waves.Length - 1;

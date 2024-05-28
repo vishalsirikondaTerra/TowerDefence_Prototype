@@ -28,6 +28,7 @@ public class Merger : MonoBehaviour
         text.text = $"{level}";
         GetComponent<Tower>().LevelIncrease();
         GetComponent<Tower>().canShoot = true;
+        gameManager.CheckHigherLevel(level);
     }
     private void OnTriggerEnter(Collider collider)
     {
