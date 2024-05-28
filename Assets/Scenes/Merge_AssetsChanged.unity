@@ -11903,6 +11903,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mergerManager: {fileID: 0}
   spawnTower: {fileID: 482633955}
+  highestLevel: 0
   HitSuccess: 0
   moveLayer:
     serializedVersion: 2
@@ -11911,7 +11912,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   hitPoint: {x: 0, y: 0, z: 0}
-  fillRate: 1
+  timeToFillElixir: 10
   maxElixirAmount: 10
   currentElixirAmount: 0
   spawnCost: 2
@@ -12124,6 +12125,7 @@ MonoBehaviour:
     spawnEnemyOfLevels: 
   spawningInProgress: 0
   currentWaveIndex: 0
+  gameManager: {fileID: 0}
 --- !u!1 &2018688128
 GameObject:
   m_ObjectHideFlags: 0
